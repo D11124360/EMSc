@@ -28,7 +28,14 @@ public class Register {
 		
 	}
 	
-	
+	/**
+	 * @param size of the register
+	 */
+	public Register(int size) {
+		super();
+		this.size = size;
+		
+	}
 	
 	
 	
