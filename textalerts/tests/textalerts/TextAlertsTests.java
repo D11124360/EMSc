@@ -7,8 +7,8 @@ import org.junit.Test;
 public class TextAlertsTests {
 	
 	// Test number 1.
-@Test
-public void shouldInitiallyAnswerThatGameIsScoreless() {
+	@Test
+	public void shouldInitiallyAnswerThatGameIsScoreless() {
 		MatchAttender attender = new MatchAttender();
 		assertEquals("0-0", attender.getScore());
 	}
