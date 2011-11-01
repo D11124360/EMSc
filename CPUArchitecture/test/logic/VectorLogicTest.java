@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import exception.IllegalLogicValue;
 import exception.IllegalVectorLogicSize;
+import exception.VectorLogicOutOfRange;
 
 /**
  * @author W Vajira Kuruppuarachchi
@@ -106,5 +107,108 @@ public class VectorLogicTest {
 		}
 	}
 	
+	/*Test Case 7
+	 * 
+	 * Bit wise access to Vector Logic
+	 * Read Bit Wise
+	 */
+	@Test
+	public void readVectorLogigBitWise(){
+		VectorLogic vectorlogic = new VectorLogic(3);
+		boolean [] value =  {true,true,true};
+		vectorlogic.writeVectorLogic(value);
+		try {
+			assertEquals(true,vectorlogic.readBitWise(2));
+		} catch (VectorLogicOutOfRange vlr) {
+			
+		}	
+	}
 	
+	/*Test Case 8
+	 * 
+	 * It should raise Exception for out of range of vector logic
+	 * Show the correct range in exception message
+	 */
+	@Test
+	public void raiseExceptionWhenTryToReadOutOfRange(){
+		VectorLogic vectorlogic = new VectorLogic(3);
+		boolean [] value =  {true,true,true};
+		vectorlogic.writeVectorLogic(value);
+		try {
+			assertEquals(true,vectorlogic.readBitWise(6));
+			fail("Exception Expected");
+		} catch (VectorLogicOutOfRange vlr) {
+			assertEquals("Index is out of range of Vector Logic. It should be: 1-3",vlr.getMessage());
+		}		
+	}
+	
+	/*Test Case 9
+	 * 
+	 * Bit wise access to Vector Logic
+	 * write Bit Wise
+	 */
+	@Test
+	public void writeVectorLogigBitWise() throws VectorLogicOutOfRange{
+		VectorLogic vectorlogic = new VectorLogic(3);
+		vectorlogic.writeBitWise(2,true);
+		assertEquals(true,vectorlogic.readBitWise(2));
+	
+	}
+	
+	/*Test Case 10
+	 * 
+	 * It should raise Exception for trying to write out of range of vector logic location
+	 * Show the correct range in exception message
+	 */
+	@Test
+	public void raiseExceptionWhenTryToWriteOutOfRange() throws VectorLogicOutOfRange{
+		VectorLogic vectorlogic = new VectorLogic(3);
+		try {
+			vectorlogic.writeBitWise(5,true);
+			fail("Exception Expected");
+		} catch (VectorLogicOutOfRange vlr) {
+			assertEquals("Index is out of range of Vector Logic. It should be: 1-3",vlr.getMessage());
+		}
+	}
+	
+	/*Test Case 11
+	 * 
+	 * Bit wise access to Vector Logic
+	 * Read char value of vector logic Bit Wise
+	 * It should raise Exception for trying to read out of range of vector logic location
+	 * Show the correct range in exception message
+	 */
+	@Test
+	public void readVectorLogigBitWiseChar(){
+		VectorLogic vectorlogic = new VectorLogic(3);
+		boolean [] value =  {true,true,true};
+		vectorlogic.writeVectorLogic(value);
+		try {
+			assertEquals('1',vectorlogic.readBitWiseChar(2));
+		} catch (VectorLogicOutOfRange vlr) {
+			
+		}	
+	}
+	
+	/*Test Case 11
+	 * 
+	 * Bit wise access to Vector Logic
+	 * write char value of vector logic Bit Wise
+	 * It should raise Exception for trying to read out of range of vector logic location
+	 * Show the correct range in exception message
+	 */
+	@Test
+	public void writeVectorLogigBitWiseChar(){
+		VectorLogic vectorlogic = new VectorLogic(3);
+		boolean [] value =  {true,true,true};
+		vectorlogic.writeVectorLogic(value);
+		try {
+			vectorlogic.writeBitWise(2, '0');
+			assertEquals('0',vectorlogic.readBitWiseChar(2));
+		} catch (VectorLogicOutOfRange vlr) {
+			
+		} catch (IllegalLogicValue e) {
+			
+		}	
+	}
 }
