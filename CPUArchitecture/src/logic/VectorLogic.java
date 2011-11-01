@@ -2,6 +2,7 @@ package logic;
 
 import exception.IllegalLogicValue;
 import exception.IllegalVectorLogicSize;
+import exception.VectorLogicOutOfRange;
 
 /**
  * @author W Vajira Kuruppuarachchi
@@ -76,7 +77,77 @@ public class VectorLogic {
 		}
 		return temp;
 	}
+
+	/**
+	 * @param index of vector logic 
+	 * @return vectorLogicValue the boolean value of vectorLogicValue[index]
+	 * @throws VectorLogicOutOfRange 
+	 */
+	public boolean readBitWise(int index) throws VectorLogicOutOfRange {
+		
+		if ((0 < index) && (index <= vectorLogicValue.length ))
+				return vectorLogicValue[index];
+		else
+				throw new VectorLogicOutOfRange("Index is out of range of Vector Logic. It should be: 1-" + vectorLogicValue.length);
+	}
+
+	/**
+	 * @param index of vector logic 
+	 * @param value of bit
+	 * @throws VectorLogicOutOfRange 
+	 */
+	public void writeBitWise(int index, boolean value) throws VectorLogicOutOfRange{
+		if ((0 < index) && (index <= vectorLogicValue.length ))
+			this.vectorLogicValue[index] = value;
+	else
+			throw new VectorLogicOutOfRange("Index is out of range of Vector Logic. It should be: 1-" + vectorLogicValue.length);
+		
+		
+	}
+
+	/**
+	 * @param index of vector logic 
+	 * @return vectorLogicValue the char value of vectorLogicValue[index]
+	 * @throws VectorLogicOutOfRange 
+	 */
+	public char readBitWiseChar(int index) throws VectorLogicOutOfRange {
+		if ((0 < index) && (index <= vectorLogicValue.length ))
+			return changeToChar(vectorLogicValue[index]);
+	else
+			throw new VectorLogicOutOfRange("Index is out of range of Vector Logic. It should be: 1-" + vectorLogicValue.length);
+	}
 	
 	
+	
+	
+	
+	private char changeToChar(boolean value){
+		if(value == true)
+			return '1';
+		else 
+			return '0';		
+	}
+	
+	private boolean changeToBoolean(char value) throws IllegalLogicValue{
+		if (value == '1')
+			return true;
+		else if (value == '0')
+			return false;
+		else 
+			throw new IllegalLogicValue("Logic value must be '0' or '1'");	
+	}
+
+	/**
+	 * @param index of vector logic 
+	 * @param value of bit
+	 * @throws IllegalLogicValue 
+	 * @throws VectorLogicOutOfRange  
+	 */
+	public void writeBitWise(int index, char value) throws IllegalLogicValue, VectorLogicOutOfRange {
+		if ((0 < index) && (index <= vectorLogicValue.length ))
+			this.vectorLogicValue[index] = changeToBoolean(value);
+	else
+			throw new VectorLogicOutOfRange("Index is out of range of Vector Logic. It should be: 1-" + vectorLogicValue.length);
+	}
 
 }
