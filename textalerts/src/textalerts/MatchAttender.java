@@ -11,10 +11,14 @@ import java.util.ArrayList;
  */
 public class MatchAttender {
 	
+	// Knowledge of Match 
 	private int homeTeamScore = 0;
 	private int awayTeamScore = 0;
 	private int timeOfLastGoal = 0;
+	private String teamLastGoal;
 	private String lastScorer;
+	
+	
 	private int messageCount = 0;
 	private ArrayList<AbsentFan> subscriber = new ArrayList<AbsentFan> ();
 	
@@ -51,21 +55,21 @@ public class MatchAttender {
 
 	public void registerScore(String team){
 		if (team == "Home"){
-			homeTeamScore++;
+			updateHomeScore();
 		}
 		else if (team == "Away"){
-			awayTeamScore++;
+			updateAwayScore();
 		}
 		
 	}
 	
 	public void registerScore(String team, int time, String player){
 		if (team == "Home"){
-			homeTeamScore++;
+			updateHomeScore();
 			
 		}
 		else if (team == "Away"){
-			awayTeamScore++;
+			updateAwayScore();
 		}
 		
 		timeOfLastGoal = time;
@@ -73,6 +77,16 @@ public class MatchAttender {
 		messageCount++;
 		sendMessage();
 		
+	}
+	
+	private void updateAwayScore() {
+		awayTeamScore++;
+		teamLastGoal = "Away";
+	}
+	
+	private void updateHomeScore() {
+		homeTeamScore++;
+		teamLastGoal = "Home";
 	}
 	
 	
@@ -90,7 +104,11 @@ public class MatchAttender {
 		for (AbsentFan x:subscriber){
 			a = x.getTextMessageCount();
 			x.setTextMessageCount((++a));
-			x.setScore(getScore());
+			x.setAwayTeamScore(awayTeamScore);
+			x.setHomeTeamScore(homeTeamScore);
+			x.setLastScorer(lastScorer);
+			x.setTimeOfLastGoal(timeOfLastGoal);
+			x.setTeamLastGoal(teamLastGoal);
 		}
 		
 	}
