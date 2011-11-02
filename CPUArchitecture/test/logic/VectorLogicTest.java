@@ -68,7 +68,7 @@ public class VectorLogicTest {
 		VectorLogic vectorlogic = new VectorLogic(4);
 		boolean [] value =  {true,false,true,false};
 		vectorlogic.writeVectorLogic(value);
-		assertEquals("1010",vectorlogic.getVectorLogicValueString());
+		assertEquals("1010",vectorlogic.readVectorLogicString());
 	}
 	
 	/*Test Case 5
@@ -190,7 +190,7 @@ public class VectorLogicTest {
 		}	
 	}
 	
-	/*Test Case 11
+	/*Test Case 12
 	 * 
 	 * Bit wise access to Vector Logic
 	 * write char value of vector logic Bit Wise

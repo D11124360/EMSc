@@ -67,7 +67,7 @@ public class VectorLogic {
 	/**
 	 * @return vectorLogicValue the vectorLogicValue to set
 	 */
-	public String getVectorLogicValueString() {
+	public String readVectorLogicString() {
 		String temp ="";
 		for(int a=0; a<this.vectorLogicValue.length; a++){
 			if(vectorLogicValue[a] == true)
@@ -98,7 +98,7 @@ public class VectorLogic {
 	 */
 	public void writeBitWise(int index, boolean value) throws VectorLogicOutOfRange{
 		if ((0 < index) && (index <= vectorLogicValue.length ))
-			this.vectorLogicValue[index] = value;
+			this.vectorLogicValue[index-1] = value;
 	else
 			throw new VectorLogicOutOfRange("Index is out of range of Vector Logic. It should be: 1-" + vectorLogicValue.length);
 		
