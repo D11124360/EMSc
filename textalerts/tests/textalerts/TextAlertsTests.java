@@ -62,5 +62,58 @@ public class TextAlertsTests {
 		assertEquals(2, john.getTextMessageCount());
 		assertEquals("2-0", john.getScore());
 	}
+	
+	// Test number 7.
+       @Test
+       public void supportersShouldBeHappyWhenTeamScores() {
+               MatchAttender attender = new MatchAttender();
+               AbsentFan john = new AbsentFan("John", attender, "Home");
+               AbsentFan jane = new AbsentFan("Jane", attender, "Away");
+               john.subscribeToAlerts();
+               jane.subscribeToAlerts();
+               attender.registerScore("Home", 12, "Balotelli");
+               assertTrue(john.isHappy());
+               assertFalse(jane.isHappy());
+               attender.registerScore("Away", 44, "Fletcher");
+               assertFalse(john.isHappy());
+               assertTrue(jane.isHappy());
+       }
+
+       // Test number 8.
+       @Test
+       public void supportersShouldKnowOtherDetails() {
+               MatchAttender attender = new MatchAttender();
+               AbsentFan john = new AbsentFan("John", attender, "Home");
+               AbsentFan jane = new AbsentFan("Jane", attender, "Away");
+               john.subscribeToAlerts();
+               jane.subscribeToAlerts();
+               attender.registerScore("Home", 12, "Balotelli");
+               assertEquals("Balotelli", john.getLastScorer());
+               assertEquals(12, john.getTimeOfLastGoal());
+       }
+
+       // Test number 9.
+       @Test
+       public void sportsReportersCanBeNotified() {
+               MatchAttender attender = new MatchAttender();
+               SportsReporter megan = new SportsReporter("Megan", attender);
+               megan.subscribeToAlerts();
+               attender.registerScore("Home", 12, "Balotelli");
+               assertEquals("Balotelli has scored for the Home team in the 12th minute."
+                               , megan.getLastReport());
+               attender.registerScore("Away", 43, "Fletcher");
+               assertEquals("Fletcher has scored for the Away team in the 43rd minute."
+                               , megan.getLastReport());
+       }
+
+       // Test number 10.
+       @Test
+       public void footballScoutCanBeNotified() {
+               MatchAttender attender = new MatchAttender();
+               FootballScout fred = new FootballScout("Fred", attender);
+               fred.subscribeToAlerts();
+               assertFalse(fred.isInterestedIn("Balotelli"));
+               attender.registerScore("Home", 12, "Balotelli");
+               assertTrue(fred.isInterestedIn("Balotelli"));
 
 }
