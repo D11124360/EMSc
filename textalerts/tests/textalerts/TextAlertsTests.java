@@ -115,6 +115,5 @@ public class TextAlertsTests {
                assertFalse(fred.isInterestedIn("Balotelli"));
                attender.registerScore("Home", 12, "Balotelli");
                assertTrue(fred.isInterestedIn("Balotelli"));
-       }
 
 }
