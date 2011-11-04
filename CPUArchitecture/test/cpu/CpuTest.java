@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author vajira
+ * @author W Vajira Kuruppuarachchi
  *
  */
 public class CpuTest {

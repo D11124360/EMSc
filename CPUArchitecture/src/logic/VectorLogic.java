@@ -15,15 +15,19 @@ public class VectorLogic {
 	
 	
 	/**
-	 * @param vectorSize
+	 * @param vectorSize Size of the vector Logic
 	 */
 	public VectorLogic(int vectorSize) {
 		super();
 		this.vectorSize = vectorSize;
 		this.vectorLogicValue = new boolean [vectorSize];
+		
+		for (int i = 0; i<this.vectorLogicValue.length;i++) {
+			vectorLogicValue[i]=false;
+		}
 
 	}
-
+	
 
 	/**
 	 * @return the vectorLogicValue
@@ -49,11 +53,12 @@ public class VectorLogic {
 	public void writeVectorLogic(String vectorLogicValue) throws IllegalLogicValue, IllegalVectorLogicSize{
 		
 		if (vectorLogicValue.length() == this.vectorLogicValue.length) {
-			String[] temp = vectorLogicValue.split("");
-			for (int a = 0; a < vectorSize; a++) {
-				if (temp[a] == "1")
+			
+			for (int a = 0; a < vectorSize; a++) 
+			{
+				if (vectorLogicValue.charAt(a) == '1')
 					this.vectorLogicValue[a] = true;
-				else if (temp[a] == "0")
+				else if (vectorLogicValue.charAt(a) == '0')
 					this.vectorLogicValue[a] = false;
 				else
 					throw new IllegalLogicValue("Logic value must be '0' or '1'");
@@ -88,7 +93,7 @@ public class VectorLogic {
 		if ((0 < index) && (index <= vectorLogicValue.length ))
 				return vectorLogicValue[index];
 		else
-				throw new VectorLogicOutOfRange("Index is out of range of Vector Logic. It should be: 1-" + vectorLogicValue.length);
+				throw new VectorLogicOutOfRange("Index is out of range of Vector Logic. It should be: 0-" + (vectorLogicValue.length-1));
 	}
 
 	/**
@@ -97,10 +102,10 @@ public class VectorLogic {
 	 * @throws VectorLogicOutOfRange 
 	 */
 	public void writeBitWise(int index, boolean value) throws VectorLogicOutOfRange{
-		if ((0 < index) && (index <= vectorLogicValue.length ))
-			this.vectorLogicValue[index-1] = value;
+		if ((0 <= index) && (index < vectorLogicValue.length ))
+			this.vectorLogicValue[index] = value;
 	else
-			throw new VectorLogicOutOfRange("Index is out of range of Vector Logic. It should be: 1-" + vectorLogicValue.length);
+			throw new VectorLogicOutOfRange("Index is out of range of Vector Logic. It should be: 0-" + (vectorLogicValue.length-1));
 		
 		
 	}
@@ -114,7 +119,7 @@ public class VectorLogic {
 		if ((0 < index) && (index <= vectorLogicValue.length ))
 			return changeToChar(vectorLogicValue[index]);
 	else
-			throw new VectorLogicOutOfRange("Index is out of range of Vector Logic. It should be: 1-" + vectorLogicValue.length);
+			throw new VectorLogicOutOfRange("Index is out of range of Vector Logic. It should be: 0-" + (vectorLogicValue.length-1));
 	}
 	
 	

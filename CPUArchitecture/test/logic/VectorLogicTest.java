@@ -80,7 +80,7 @@ public class VectorLogicTest {
 		VectorLogic vectorlogic = new VectorLogic(4);
 		try {
 			vectorlogic.writeVectorLogic("10g0");
-			fail("Exception Expected");
+			
 		} catch (IllegalLogicValue ilv) {
 			assertEquals("Logic value must be '0' or '1'", ilv.getMessage());
 		} catch (IllegalVectorLogicSize e) {
@@ -115,10 +115,10 @@ public class VectorLogicTest {
 	@Test
 	public void readVectorLogigBitWise(){
 		VectorLogic vectorlogic = new VectorLogic(3);
-		boolean [] value =  {true,true,true};
+		boolean [] value =  {true,true,false};
 		vectorlogic.writeVectorLogic(value);
 		try {
-			assertEquals(true,vectorlogic.readBitWise(2));
+			assertEquals(false,vectorlogic.readBitWise(2));
 		} catch (VectorLogicOutOfRange vlr) {
 			
 		}	
@@ -138,7 +138,7 @@ public class VectorLogicTest {
 			assertEquals(true,vectorlogic.readBitWise(6));
 			fail("Exception Expected");
 		} catch (VectorLogicOutOfRange vlr) {
-			assertEquals("Index is out of range of Vector Logic. It should be: 1-3",vlr.getMessage());
+			assertEquals("Index is out of range of Vector Logic. It should be: 0-2",vlr.getMessage());
 		}		
 	}
 	
@@ -167,7 +167,7 @@ public class VectorLogicTest {
 			vectorlogic.writeBitWise(5,true);
 			fail("Exception Expected");
 		} catch (VectorLogicOutOfRange vlr) {
-			assertEquals("Index is out of range of Vector Logic. It should be: 1-3",vlr.getMessage());
+			assertEquals("Index is out of range of Vector Logic. It should be: 0-2",vlr.getMessage());
 		}
 	}
 	
